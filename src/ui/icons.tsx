@@ -6,11 +6,11 @@ interface IconProps {
 }
 
 const stroke = {
-  fill: 'none',
-  stroke: 'currentColor',
+  fill: "none",
+  stroke: "currentColor",
   strokeWidth: 1.6,
-  strokeLinecap: 'round' as const,
-  strokeLinejoin: 'round' as const,
+  strokeLinecap: "round" as const,
+  strokeLinejoin: "round" as const,
 };
 
 export function HeadIcon({ className }: IconProps) {
@@ -54,16 +54,6 @@ export function UmbrellaIcon({ className }: IconProps) {
       <path d="M12 3v2" />
       <path d="M3 12a9 7 0 0 1 18 0Z" />
       <path d="M12 12v7a2 2 0 0 0 4 0" />
-    </svg>
-  );
-}
-
-export function SunglassesIcon({ className }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} {...stroke}>
-      <path d="M3 9h6v4a2 2 0 0 1-6 0V9Z" />
-      <path d="M15 9h6v4a2 2 0 0 1-6 0V9Z" />
-      <path d="M9 11h6" />
     </svg>
   );
 }

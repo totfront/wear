@@ -14,7 +14,6 @@ import {
   LowerIcon,
   FeetIcon,
   UmbrellaIcon,
-  SunglassesIcon,
 } from "./ui/icons";
 import "./App.css";
 
