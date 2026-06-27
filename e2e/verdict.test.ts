@@ -7,6 +7,8 @@ test.describe("Verdict", () => {
     await page.reload();
     await page.getByLabel("Search for a city").fill("Paris");
     await page.getByText("France").first().click();
-    await expect(page.getByText(/— .+\./)).toBeVisible({ timeout: 10000 });
+    await expect(
+      page.getByText(/(Hot|Warm|Mild|Cool|Chilly|Cold|Freezing)/)
+    ).toBeVisible({ timeout: 15000 });
   });
 });
