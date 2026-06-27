@@ -138,7 +138,7 @@ export default function App() {
   const isRecommendationReady = status === "ready" && weather && rec;
   const geoGranted = geoPermission === "granted";
   const geoResolved = geoPermission !== "unknown";
-  const hideLocator = geoGranted && !alwaysShowLocation && !locatorForced && status !== "idle";
+  const hideLocator = geoGranted && !alwaysShowLocation && !locatorForced;
 
   return (
     <main>
