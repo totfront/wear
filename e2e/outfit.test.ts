@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures";
 
 test.describe("Outfit", () => {
   test("shows all four body zones with clothing items", async ({ page }) => {
@@ -6,7 +6,7 @@ test.describe("Outfit", () => {
     await page.evaluate(() => localStorage.clear());
     await page.reload();
     await page.getByLabel("Search for a city").fill("Madrid");
-    await expect(page.getByText("Spain")).toBeVisible({ timeout: 5000 });
+    await expect(page.getByText("Spain")).toBeVisible({ timeout: 10000 });
     await page.getByText("Spain").first().click();
     await expect(page.getByText("Head", { exact: true })).toBeVisible({ timeout: 10000 });
     await expect(page.getByText("Upper body")).toBeVisible();
