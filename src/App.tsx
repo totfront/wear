@@ -108,7 +108,15 @@ export default function App() {
 
   return (
     <main>
-      <Settings onLocaleChange={() => setLocaleKey((k) => k + 1)} />
+      <Settings onLocaleChange={() => setLocaleKey((k) => k + 1)} onThemeChange={() => {
+        if (weather) {
+          const rec2 = recommend({ temperature: weather.temperature, precipProbability: weather.precipProbability, uvIndex: weather.uvIndex }, sensitivity);
+          const p = paletteFor(rec2.band.name);
+          document.body.style.setProperty("--sky-top", p.skyTop);
+          document.body.style.setProperty("--sky-bottom", p.skyBottom);
+          document.body.style.setProperty("--accent", p.accent);
+        }
+      }} />
       <Header />
       <Locator onUseMyLocation={useMyLocation} onSelectCity={loadWeather} />
 

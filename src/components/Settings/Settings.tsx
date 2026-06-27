@@ -1,5 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { type Locale, t, getLocale, setLocale } from "../../i18n/translations";
+
+type Theme = "light" | "dark" | "system";
+
+function getStoredTheme(): Theme {
+  return (localStorage.getItem("wear:theme") as Theme) || "system";
+}
+
+function applyTheme(theme: Theme) {
+  const isDark =
+    theme === "dark" ||
+    (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+  document.documentElement.classList.toggle("dark", isDark);
+}
 
 const LOCALE_LABELS: { key: Locale; flag: string; label: string }[] = [
   { key: "en", flag: "🇬🇧", label: "English" },
@@ -10,12 +23,29 @@ const LOCALE_LABELS: { key: Locale; flag: string; label: string }[] = [
 
 interface SettingsProps {
   onLocaleChange: () => void;
+  onThemeChange?: () => void;
 }
 
-export default function Settings({ onLocaleChange }: SettingsProps) {
+export default function Settings({ onLocaleChange, onThemeChange }: SettingsProps) {
   const [open, setOpen] = useState(false);
   const [currentLocale, setCurrentLocale] = useState(getLocale());
+  const [currentTheme, setCurrentTheme] = useState<Theme>(getStoredTheme);
   const labels = t();
+
+  useEffect(() => {
+    applyTheme(currentTheme);
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    const handler = () => { if (currentTheme === "system") applyTheme("system"); };
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, [currentTheme]);
+
+  const handleThemeChange = (theme: Theme) => {
+    setCurrentTheme(theme);
+    localStorage.setItem("wear:theme", theme);
+    applyTheme(theme);
+    onThemeChange?.();
+  };
 
   const handleLocaleChange = (locale: Locale) => {
     setLocale(locale);
@@ -77,6 +107,32 @@ export default function Settings({ onLocaleChange }: SettingsProps) {
                   <line x1="6" y1="6" x2="18" y2="18" />
                 </svg>
               </button>
+            </div>
+
+            <div className="mb-5">
+              <div className="text-[0.78rem] uppercase tracking-[0.09em] text-[var(--ink-faint)] font-semibold mb-2">
+                {labels.theme}
+              </div>
+              <div className="flex gap-2 flex-wrap">
+                {([
+                  { key: "light" as Theme, label: labels.themeLight, icon: "☀️" },
+                  { key: "dark" as Theme, label: labels.themeDark, icon: "🌙" },
+                  { key: "system" as Theme, label: labels.themeSystem, icon: "💻" },
+                ]).map(({ key, label, icon }) => (
+                  <button
+                    key={key}
+                    className={`flex items-center gap-1.5 px-3 py-2 rounded-xl border text-[0.88rem] font-medium cursor-pointer transition-all duration-150 ${
+                      currentTheme === key
+                        ? "bg-[var(--accent)] text-white border-[var(--accent)] shadow-[0_1px_3px_rgba(28,26,23,0.12)]"
+                        : "bg-transparent text-[var(--ink)] border-[var(--card-line)] hover:bg-[rgba(28,26,23,0.04)]"
+                    }`}
+                    onClick={() => handleThemeChange(key)}
+                  >
+                    <span>{icon}</span>
+                    <span>{label}</span>
+                  </button>
+                ))}
+              </div>
             </div>
 
             <div className="mb-5">

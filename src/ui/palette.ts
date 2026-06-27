@@ -15,6 +15,21 @@ export const BAND_PALETTES: Record<string, Palette> = {
   Freezing: { skyTop: '#c3cfe0', skyBottom: '#eef1f6', accent: '#3a4a6b' },
 };
 
+export const BAND_PALETTES_DARK: Record<string, Palette> = {
+  Hot: { skyTop: '#2d1f0e', skyBottom: '#1a1510', accent: '#e07840' },
+  Warm: { skyTop: '#2a1f0d', skyBottom: '#1a1610', accent: '#d4962e' },
+  Mild: { skyTop: '#1a2516', skyBottom: '#121810', accent: '#6aad5a' },
+  Cool: { skyTop: '#162230', skyBottom: '#101820', accent: '#5a9ec0' },
+  Chilly: { skyTop: '#161e2e', skyBottom: '#101620', accent: '#6080b0' },
+  Cold: { skyTop: '#141a28', skyBottom: '#0e1220', accent: '#5a70a0' },
+  Freezing: { skyTop: '#151a28', skyBottom: '#0e1220', accent: '#5068a0' },
+};
+
+export function isDark(): boolean {
+  return document.documentElement.classList.contains('dark');
+}
+
 export function paletteFor(bandName: string): Palette {
-  return BAND_PALETTES[bandName] ?? BAND_PALETTES.Cool;
+  const palettes = isDark() ? BAND_PALETTES_DARK : BAND_PALETTES;
+  return palettes[bandName] ?? palettes.Cool;
 }
