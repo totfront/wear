@@ -201,9 +201,9 @@ export default function App() {
       )}
 
       {isRecommendationReady && (
-        <>
+        <div key={placeName}>
           {/* 2. Context — place + temperature */}
-          <section className="text-center mb-[18px]">
+          <section className="animate-in text-center mb-[18px]">
             <div className="font-[var(--font-display)] text-[4rem] font-medium leading-none tracking-[-0.03em] text-[var(--ink)]">
               {Math.round(weather.temperature)}°
               <span className="block font-[var(--font-body)] text-[0.82rem] font-medium text-[var(--ink-soft)] tracking-[0.02em] mt-1.5">
@@ -220,14 +220,14 @@ export default function App() {
           </section>
 
           {/* 3. Verdict */}
-          <section className="bg-[var(--card)] backdrop-blur-[10px] border border-[var(--card-line)] rounded-[var(--radius)] px-[22px] py-[18px] mb-[18px] shadow-[var(--shadow)]">
+          <section className="animate-in bg-[var(--card)] backdrop-blur-[10px] border border-[var(--card-line)] rounded-[var(--radius)] px-[22px] py-[18px] mb-[18px] shadow-[var(--shadow)]">
             <p className="font-[var(--font-display)] text-[1.32rem] font-medium leading-[1.32] tracking-[-0.01em] text-[var(--ink)]">
               {rec.summary}.
             </p>
           </section>
 
           {/* 4. Outfit — the answer */}
-          <section className="outfit-thread relative flex flex-col gap-0.5">
+          <section className="animate-in outfit-thread relative flex flex-col gap-0.5">
             {ZONE_META.map(({ key, label, Icon }) => (
               <div
                 className="flex items-center gap-4 px-4 py-3.5 relative"
@@ -258,7 +258,7 @@ export default function App() {
           </section>
 
           {/* 5. Umbrella */}
-          <section className="flex items-center justify-center gap-2.5 px-5 py-3.5 mt-[18px] mb-[18px] bg-[var(--card)] backdrop-blur-[10px] border border-[var(--card-line)] rounded-[var(--radius)] shadow-[var(--shadow)] text-[0.95rem] font-semibold text-[var(--ink)]">
+          <section className="animate-in flex items-center justify-center gap-2.5 px-5 py-3.5 mt-[18px] mb-[18px] bg-[var(--card)] backdrop-blur-[10px] border border-[var(--card-line)] rounded-[var(--radius)] shadow-[var(--shadow)] text-[0.95rem] font-semibold text-[var(--ink)]">
             <span className="text-[var(--accent)] shrink-0 [&_svg]:w-5 [&_svg]:h-5">
               <UmbrellaIcon />
             </span>
@@ -272,7 +272,7 @@ export default function App() {
           </section>
 
           {/* 6. Sensitivity — setting, not action */}
-          <section className="flex items-center justify-between gap-3 mb-[22px] px-1">
+          <section className="animate-in flex items-center justify-between gap-3 mb-[22px] px-1">
             <span className="text-[0.82rem] text-[var(--ink-soft)] whitespace-nowrap">
               I tend to feel
             </span>
@@ -298,14 +298,14 @@ export default function App() {
           </section>
 
           {/* 7. Teaser */}
-          <section className="mt-[34px] px-[18px] py-4 border border-dashed border-[var(--card-line)] rounded-[var(--radius)] text-center">
+          <section className="animate-in mt-[34px] px-[18px] py-4 border border-dashed border-[var(--card-line)] rounded-[var(--radius)] text-center">
             <p className="text-[0.84rem] text-[var(--ink-soft)] leading-normal">
               🚧 Soon: upload your wardrobe and get your
               <em className="text-[var(--accent)] italic">actual</em> outfit,
               not just the category. 🚧
             </p>
           </section>
-        </>
+        </div>
       )}
     </main>
   );
