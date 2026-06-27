@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures";
 
 test.describe("UmbrellaBanner", () => {
   test("shows an umbrella recommendation after loading weather", async ({ page }) => {

@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures";
 
 test.describe("WeatherContext", () => {
   test("shows temperature, place name, and meta after city selection", async ({ page }) => {

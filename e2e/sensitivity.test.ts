@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures";
 
 test.describe("Sensitivity", () => {
   test("toggles sensitivity and updates recommendation", async ({ page }) => {

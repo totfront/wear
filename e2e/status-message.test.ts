@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures";
 
 test.describe("StatusMessage", () => {
   test("shows idle message when no location is set", async ({ page }) => {

@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures";
 
 test.describe("Outfit", () => {
   test("shows all four body zones with clothing items", async ({ page }) => {

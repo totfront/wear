@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures";
 
 test.describe("Teaser", () => {
   test("shows the teaser section after loading weather", async ({ page }) => {
