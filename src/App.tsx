@@ -72,15 +72,17 @@ export default function App() {
   }, [loadWeather]);
 
   useEffect(() => {
-    const saved = localStorage.getItem("wear:last-location");
-    if (saved) {
-      try {
-        const { lat, lon, name } = JSON.parse(saved);
-        loadWeather(lat, lon, name);
-      } catch {
-        /* ignore corrupt data */
+    const loadFromCache = () => {
+      const saved = localStorage.getItem("wear:last-location");
+      if (saved) {
+        try {
+          const { lat, lon, name } = JSON.parse(saved);
+          loadWeather(lat, lon, name);
+        } catch {
+          /* ignore corrupt data */
+        }
       }
-    }
+    };
 
     if (navigator.permissions) {
       navigator.permissions.query({ name: "geolocation" }).then((result) => {
@@ -92,11 +94,17 @@ export default function App() {
           getBrowserLocation().then(async ({ lat, lon }) => {
             const name = await reverseGeocode(lat, lon);
             loadWeather(lat, lon, name);
-          }).catch(() => {});
+          }).catch(loadFromCache);
+        } else {
+          loadFromCache();
         }
-      }).catch(() => setGeoPermission("other"));
+      }).catch(() => {
+        setGeoPermission("other");
+        loadFromCache();
+      });
     } else {
       setGeoPermission("other");
+      loadFromCache();
     }
   }, [loadWeather]);
 
