@@ -7,6 +7,7 @@ import {
 } from "./data/weather";
 import { recommend, type Sensitivity } from "./recommend/recommend";
 import { paletteFor } from "./ui/palette";
+import { t } from "./i18n/translations";
 import Header from "./components/Header/Header";
 import Locator from "./components/Locator/Locator";
 import StatusMessage from "./components/StatusMessage/StatusMessage";
@@ -16,6 +17,7 @@ import Outfit from "./components/Outfit/Outfit";
 import UmbrellaBanner from "./components/UmbrellaBanner/UmbrellaBanner";
 import SensitivityToggle from "./components/Sensitivity/Sensitivity";
 import Teaser from "./components/Teaser/Teaser";
+import Settings from "./components/Settings/Settings";
 import "./App.css";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -27,6 +29,7 @@ export default function App() {
   const [placeName, setPlaceName] = useState<string>("");
   const [sensitivity, setSensitivity] = useState<Sensitivity>("normal");
   const [error, setError] = useState<string>("");
+  const [, setLocaleKey] = useState(0);
 
   const loadWeather = useCallback(
     async (lat: number, lon: number, name: string) => {
@@ -42,9 +45,7 @@ export default function App() {
           JSON.stringify({ lat, lon, name }),
         );
       } catch {
-        setError(
-          "Could not load the weather. Check your connection and try again.",
-        );
+        setError(t().connectionError);
         setStatus("error");
       }
     },
@@ -59,7 +60,7 @@ export default function App() {
       const name = await reverseGeocode(lat, lon);
       await loadWeather(lat, lon, name);
     } catch {
-      setError("Location is off. Search for a city instead.");
+      setError(t().locationError);
       setStatus("error");
     }
   }, [loadWeather]);
@@ -107,6 +108,7 @@ export default function App() {
 
   return (
     <main>
+      <Settings onLocaleChange={() => setLocaleKey((k) => k + 1)} />
       <Header />
       <Locator onUseMyLocation={useMyLocation} onSelectCity={loadWeather} />
 
@@ -117,7 +119,7 @@ export default function App() {
       {isRecommendationReady && (
         <div key={placeName}>
           <WeatherContext weather={weather} placeName={placeName} />
-          <Verdict summary={rec.summary} />
+          <Verdict bandName={rec.band.name} raining={weather.precipProbability >= 40 && weather.temperature > 1} />
           <Outfit zones={rec.zones} />
           <UmbrellaBanner precipProbability={weather.precipProbability} />
           <SensitivityToggle value={sensitivity} onChange={setSensitivity} />

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { searchCity, type Place } from "../../data/weather";
+import { t } from "../../i18n/translations";
 
 interface LocatorProps {
   onUseMyLocation: () => void;
@@ -20,7 +21,7 @@ export default function Locator({
       return;
     }
     setSearching(true);
-    const t = setTimeout(async () => {
+    const timer = setTimeout(async () => {
       try {
         setResults(await searchCity(query));
       } catch {
@@ -29,7 +30,7 @@ export default function Locator({
         setSearching(false);
       }
     }, 300);
-    return () => clearTimeout(t);
+    return () => clearTimeout(timer);
   }, [query]);
 
   return (
@@ -38,22 +39,22 @@ export default function Locator({
         className="inline-flex items-center justify-center gap-2 w-full p-[13px] border-none rounded-[14px] bg-[var(--accent)] text-white font-[var(--font-body)] text-[0.95rem] font-semibold cursor-pointer shadow-[var(--shadow)] transition-[filter,transform,background] duration-[180ms,180ms,1200ms] ease-in-out hover:brightness-105 active:scale-[0.985] focus-visible:outline-3 focus-visible:outline-[var(--ink)] focus-visible:outline-offset-2"
         onClick={onUseMyLocation}
       >
-        <LocationDot /> Use my location
+        <LocationDot /> {t().useMyLocation}
       </button>
       <div className="relative">
         <input
           className="w-full px-3.5 py-3 border border-[var(--card-line)] rounded-[14px] bg-[var(--card)] font-[var(--font-body)] text-[0.95rem] text-[var(--ink)] backdrop-blur-[8px] placeholder:text-[var(--ink-faint)] focus-visible:outline-3 focus-visible:outline-[var(--accent)] focus-visible:outline-offset-1"
           type="text"
-          placeholder="or search a city…"
+          placeholder={t().searchPlaceholder}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          aria-label="Search for a city"
+          aria-label={t().searchAriaLabel}
         />
         {(results.length > 0 || searching) && query.trim() && (
           <ul className="list-none absolute top-[calc(100%+6px)] left-0 right-0 bg-white/96 backdrop-blur-[12px] border border-[var(--card-line)] rounded-[14px] shadow-[var(--shadow)] overflow-hidden z-10">
             {searching && (
               <li className="px-3.5 py-[11px] text-[0.85rem] text-[var(--ink-faint)]">
-                Searching…
+                {t().searching}
               </li>
             )}
             {results.map((r, i) => (

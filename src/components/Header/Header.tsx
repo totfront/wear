@@ -1,3 +1,5 @@
+import { t } from "../../i18n/translations";
+
 export default function Header() {
   return (
     <header className="text-center mb-[22px]">
@@ -8,7 +10,7 @@ export default function Header() {
         </span>
       </h1>
       <p className="text-[0.82rem] text-[var(--ink-soft)] tracking-[0.04em] mt-1">
-        what to actually put on
+        {t().tagline}
       </p>
     </header>
   );

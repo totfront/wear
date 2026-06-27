@@ -1,3 +1,5 @@
+import { t } from "../../i18n/translations";
+
 interface StatusMessageProps {
   status: "idle" | "locating" | "loading" | "error";
   error?: string;
@@ -7,7 +9,7 @@ export default function StatusMessage({ status, error }: StatusMessageProps) {
   if (status === "idle") {
     return (
       <div className="text-center py-12 px-5 text-[var(--ink-soft)] text-base leading-normal">
-        <p>Tell me where you are and I'll tell you what to wear.</p>
+        <p>{t().idleMessage}</p>
       </div>
     );
   }
@@ -16,7 +18,7 @@ export default function StatusMessage({ status, error }: StatusMessageProps) {
     return (
       <div className="text-center py-12 px-5 text-[var(--ink-soft)] text-base leading-normal">
         <p className="pulse">
-          {status === "locating" ? "Finding you…" : "Reading the sky…"}
+          {status === "locating" ? t().locating : t().loadingWeather}
         </p>
       </div>
     );

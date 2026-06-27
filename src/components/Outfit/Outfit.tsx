@@ -5,22 +5,24 @@ import {
   FeetIcon,
 } from "../../ui/icons";
 import type { Item, Zone } from "../../recommend/bands";
-
-const ZONE_META = [
-  { key: "head" as Zone, label: "Head", Icon: HeadIcon },
-  { key: "upper" as Zone, label: "Upper body", Icon: UpperIcon },
-  { key: "lower" as Zone, label: "Lower body", Icon: LowerIcon },
-  { key: "feet" as Zone, label: "Feet", Icon: FeetIcon },
-];
+import { t, getItemLabel } from "../../i18n/translations";
 
 interface OutfitProps {
   zones: Record<Zone, Item[]>;
 }
 
 export default function Outfit({ zones }: OutfitProps) {
+  const labels = t();
+  const zoneMeta = [
+    { key: "head" as Zone, label: labels.head, Icon: HeadIcon },
+    { key: "upper" as Zone, label: labels.upperBody, Icon: UpperIcon },
+    { key: "lower" as Zone, label: labels.lowerBody, Icon: LowerIcon },
+    { key: "feet" as Zone, label: labels.feet, Icon: FeetIcon },
+  ];
+
   return (
     <section className="animate-in outfit-thread relative flex flex-col gap-0.5">
-      {ZONE_META.map(({ key, label, Icon }) => (
+      {zoneMeta.map(({ key, label, Icon }) => (
         <div className="flex items-center gap-4 px-4 py-3.5 relative" key={key}>
           <div className="shrink-0 w-[38px] h-[38px] grid place-items-center bg-[var(--card)] border border-[var(--card-line)] rounded-full text-[var(--accent)] shadow-[var(--shadow)] z-[1] transition-colors duration-[1200ms] ease-in-out [&_svg]:w-[21px] [&_svg]:h-[21px]">
             <Icon />
@@ -34,10 +36,10 @@ export default function Outfit({ zones }: OutfitProps) {
                 <span key={it.category}>
                   {i > 0 && (
                     <span className="text-[0.8rem] text-[var(--ink-faint)] italic mx-[7px]">
-                      or
+                      {labels.or}
                     </span>
                   )}
-                  <span className="font-medium">{it.label}</span>
+                  <span className="font-medium">{getItemLabel(it.category)}</span>
                 </span>
               ))}
             </div>
