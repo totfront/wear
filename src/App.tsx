@@ -7,6 +7,7 @@ import {
 } from "./data/weather";
 import { recommend, type Sensitivity } from "./recommend/recommend";
 import { paletteFor } from "./ui/palette";
+import { t } from "./i18n/translations";
 import Header from "./components/Header/Header";
 import Locator from "./components/Locator/Locator";
 import StatusMessage from "./components/StatusMessage/StatusMessage";
@@ -42,9 +43,7 @@ export default function App() {
           JSON.stringify({ lat, lon, name }),
         );
       } catch {
-        setError(
-          "Could not load the weather. Check your connection and try again.",
-        );
+        setError(t().connectionError);
         setStatus("error");
       }
     },
@@ -59,7 +58,7 @@ export default function App() {
       const name = await reverseGeocode(lat, lon);
       await loadWeather(lat, lon, name);
     } catch {
-      setError("Location is off. Search for a city instead.");
+      setError(t().locationError);
       setStatus("error");
     }
   }, [loadWeather]);
@@ -117,7 +116,7 @@ export default function App() {
       {isRecommendationReady && (
         <div key={placeName}>
           <WeatherContext weather={weather} placeName={placeName} />
-          <Verdict summary={rec.summary} />
+          <Verdict bandName={rec.band.name} raining={weather.precipProbability >= 40 && weather.temperature > 1} />
           <Outfit zones={rec.zones} />
           <UmbrellaBanner precipProbability={weather.precipProbability} />
           <SensitivityToggle value={sensitivity} onChange={setSensitivity} />
