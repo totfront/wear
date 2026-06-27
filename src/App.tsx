@@ -152,7 +152,7 @@ export default function App() {
         <Locator onUseMyLocation={useMyLocation} onSelectCity={loadWeather} />
       )}
 
-      {status !== "ready" && (
+      {status !== "ready" && geoResolved && !(status === "idle" && localStorage.getItem("wear:last-location")) && (
         <StatusMessage status={status} error={error} />
       )}
 
