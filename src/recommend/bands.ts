@@ -38,7 +38,7 @@ export const BANDS: Band[] = [
   {
     minTemp: 30,
     name: 'Hot',
-    blurb: 'Stay cool and cover up from the sun',
+    blurb: 'Stay cool, cover up from the sun',
     head: [item('cap', 'Cap'), item('none', 'No cap')],
     upper: [item('tshirt', 'T-shirt'), item('tank', 'Tank top')],
     lower: [item('shorts', 'Shorts'), item('light_pants', 'Light pants')],

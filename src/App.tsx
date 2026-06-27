@@ -120,64 +120,18 @@ export default function App() {
     <main>
       <header className="text-center mb-[22px]">
         <h1 className="font-[var(--font-display)] font-semibold text-[2.6rem] tracking-[-0.02em] leading-none text-[var(--ink)]">
-          wear<span className="text-[var(--accent)] transition-colors duration-[1200ms] ease-in-out">.</span>
+          wear
+          <span className="text-[var(--accent)] transition-colors duration-[1200ms] ease-in-out">
+            .
+          </span>
         </h1>
         <p className="text-[0.82rem] text-[var(--ink-soft)] tracking-[0.04em] mt-1">
           what to actually put on
         </p>
       </header>
 
-      {isRecommendationReady && (
-        <>
-          <section className="bg-[var(--card)] backdrop-blur-[10px] border border-[var(--card-line)] rounded-[var(--radius)] px-[22px] py-[18px] mb-[18px] shadow-[var(--shadow)]">
-            <p className="font-[var(--font-display)] text-[1.32rem] font-medium leading-[1.32] tracking-[-0.01em] text-[var(--ink)]">
-              {rec.summary}.
-            </p>
-          </section>
-
-          <section className="flex items-center justify-center gap-2.5 px-5 py-3.5 mb-[18px] bg-[var(--card)] backdrop-blur-[10px] border border-[var(--card-line)] rounded-[var(--radius)] shadow-[var(--shadow)] text-[0.95rem] font-semibold text-[var(--ink)]">
-            <span className="text-[var(--accent)] shrink-0 [&_svg]:w-5 [&_svg]:h-5">
-              <UmbrellaIcon />
-            </span>
-            <span>
-              {weather.precipProbability >= 60
-                ? "You MUST HAVE an umbrella"
-                : weather.precipProbability >= 30
-                  ? "You SHOULD TAKE an umbrella"
-                  : "You DO NOT NEED an umbrella"}
-            </span>
-          </section>
-
-          <section className="outfit-thread relative flex flex-col gap-0.5">
-            {ZONE_META.map(({ key, label, Icon }) => (
-              <div className="flex items-center gap-4 px-4 py-3.5 relative" key={key}>
-                <div className="shrink-0 w-[38px] h-[38px] grid place-items-center bg-[var(--card)] border border-[var(--card-line)] rounded-full text-[var(--accent)] shadow-[var(--shadow)] z-[1] transition-colors duration-[1200ms] ease-in-out [&_svg]:w-[21px] [&_svg]:h-[21px]">
-                  <Icon />
-                </div>
-                <div className="flex-1">
-                  <div className="text-[0.72rem] uppercase tracking-[0.09em] text-[var(--ink-faint)] font-semibold mb-[3px]">
-                    {label}
-                  </div>
-                  <div className="text-[1.04rem] text-[var(--ink)] leading-[1.35]">
-                    {rec.zones[key].map((it, i) => (
-                      <span key={it.category}>
-                        {i > 0 && (
-                          <span className="text-[0.8rem] text-[var(--ink-faint)] italic mx-[7px]">
-                            or
-                          </span>
-                        )}
-                        <span className="font-medium">{it.label}</span>
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </section>
-        </>
-      )}
-
-      <section className="flex flex-col gap-2.5 mb-[22px] mt-2">
+      {/* 1. Locator — the only action */}
+      <section className="flex flex-col gap-2.5 mb-[22px]">
         <button
           className="inline-flex items-center justify-center gap-2 w-full p-[13px] border-none rounded-[14px] bg-[var(--accent)] text-white font-[var(--font-body)] text-[0.95rem] font-semibold cursor-pointer shadow-[var(--shadow)] transition-[filter,transform,background] duration-[180ms,180ms,1200ms] ease-in-out hover:brightness-105 active:scale-[0.985] focus-visible:outline-3 focus-visible:outline-[var(--ink)] focus-visible:outline-offset-2"
           onClick={useMyLocation}
@@ -249,7 +203,14 @@ export default function App() {
 
       {isRecommendationReady && (
         <>
+          {/* 2. Context — place + temperature */}
           <section className="text-center mb-[18px]">
+            <div className="font-[var(--font-display)] text-[4rem] font-medium leading-none tracking-[-0.03em] text-[var(--ink)]">
+              {Math.round(weather.temperature)}°
+              <span className="block font-[var(--font-body)] text-[0.82rem] font-medium text-[var(--ink-soft)] tracking-[0.02em] mt-1.5">
+                feels {Math.round(weather.apparentTemperature)}°
+              </span>
+            </div>
             <div className="text-base font-semibold text-[var(--ink)] mt-2.5">
               {placeName}
             </div>
@@ -259,16 +220,60 @@ export default function App() {
             </div>
           </section>
 
-          <section className="text-center mb-0">
-            <div className="font-[var(--font-display)] text-[4rem] font-medium leading-none tracking-[-0.03em] text-[var(--ink)]">
-              {Math.round(weather.temperature)}°
-              <span className="block font-[var(--font-body)] text-[0.82rem] font-medium text-[var(--ink-soft)] tracking-[0.02em] mt-1.5">
-                feels {Math.round(weather.apparentTemperature)}°
-              </span>
-            </div>
+          {/* 3. Verdict */}
+          <section className="bg-[var(--card)] backdrop-blur-[10px] border border-[var(--card-line)] rounded-[var(--radius)] px-[22px] py-[18px] mb-[18px] shadow-[var(--shadow)]">
+            <p className="font-[var(--font-display)] text-[1.32rem] font-medium leading-[1.32] tracking-[-0.01em] text-[var(--ink)]">
+              {rec.summary}.
+            </p>
           </section>
 
-          <section className="flex items-center justify-between gap-3 mb-[22px] px-1 mt-4">
+          {/* 4. Outfit — the answer */}
+          <section className="outfit-thread relative flex flex-col gap-0.5">
+            {ZONE_META.map(({ key, label, Icon }) => (
+              <div
+                className="flex items-center gap-4 px-4 py-3.5 relative"
+                key={key}
+              >
+                <div className="shrink-0 w-[38px] h-[38px] grid place-items-center bg-[var(--card)] border border-[var(--card-line)] rounded-full text-[var(--accent)] shadow-[var(--shadow)] z-[1] transition-colors duration-[1200ms] ease-in-out [&_svg]:w-[21px] [&_svg]:h-[21px]">
+                  <Icon />
+                </div>
+                <div className="flex-1">
+                  <div className="text-[0.72rem] uppercase tracking-[0.09em] text-[var(--ink-faint)] font-semibold mb-[3px]">
+                    {label}
+                  </div>
+                  <div className="text-[1.04rem] text-[var(--ink)] leading-[1.35]">
+                    {rec.zones[key].map((it, i) => (
+                      <span key={it.category}>
+                        {i > 0 && (
+                          <span className="text-[0.8rem] text-[var(--ink-faint)] italic mx-[7px]">
+                            or
+                          </span>
+                        )}
+                        <span className="font-medium">{it.label}</span>
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </section>
+
+          {/* 5. Umbrella */}
+          <section className="flex items-center justify-center gap-2.5 px-5 py-3.5 mt-[18px] mb-[18px] bg-[var(--card)] backdrop-blur-[10px] border border-[var(--card-line)] rounded-[var(--radius)] shadow-[var(--shadow)] text-[0.95rem] font-semibold text-[var(--ink)]">
+            <span className="text-[var(--accent)] shrink-0 [&_svg]:w-5 [&_svg]:h-5">
+              <UmbrellaIcon />
+            </span>
+            <span>
+              {weather.precipProbability >= 60
+                ? "You MUST HAVE an umbrella"
+                : weather.precipProbability >= 30
+                  ? "You SHOULD TAKE an umbrella"
+                  : "You DO NOT NEED an umbrella"}
+            </span>
+          </section>
+
+          {/* 6. Sensitivity — setting, not action */}
+          <section className="flex items-center justify-between gap-3 mb-[22px] px-1">
             <span className="text-[0.82rem] text-[var(--ink-soft)] whitespace-nowrap">
               I tend to feel
             </span>
@@ -293,25 +298,12 @@ export default function App() {
             </div>
           </section>
 
-          {rec.accessories.length > 0 && (
-            <section className="flex gap-2.5 flex-wrap mt-[18px] px-4">
-              {rec.accessories.map((a) => (
-                <div
-                  className="inline-flex items-center gap-[7px] py-[9px] pr-[15px] pl-3 bg-[var(--accent)] text-white rounded-full text-[0.88rem] font-semibold shadow-[var(--shadow)] transition-[background] duration-[1200ms] ease-in-out [&_svg]:w-[18px] [&_svg]:h-[18px]"
-                  key={a.key}
-                >
-                  {a.key === "umbrella" ? <UmbrellaIcon /> : <SunglassesIcon />}
-                  <span>{a.label}</span>
-                </div>
-              ))}
-            </section>
-          )}
-
+          {/* 7. Teaser */}
           <section className="mt-[34px] px-[18px] py-4 border border-dashed border-[var(--card-line)] rounded-[var(--radius)] text-center">
             <p className="text-[0.84rem] text-[var(--ink-soft)] leading-normal">
-              Soon: upload your wardrobe and get your{" "}
+              🚧 Soon: upload your wardrobe and get your
               <em className="text-[var(--accent)] italic">actual</em> outfit,
-              not just the category.
+              not just the category. 🚧
             </p>
           </section>
         </>
