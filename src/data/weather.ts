@@ -81,6 +81,22 @@ export async function searchCity(query: string): Promise<Place[]> {
   }));
 }
 
+export async function reverseGeocode(lat: number, lon: number): Promise<string> {
+  try {
+    const res = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=10&accept-language=en`
+    );
+    if (!res.ok) return 'Your location';
+    const data = await res.json();
+    const a = data.address ?? {};
+    const city = a.city || a.town || a.village || a.municipality || '';
+    const country = a.country || '';
+    return [city, country].filter(Boolean).join(', ') || 'Your location';
+  } catch {
+    return 'Your location';
+  }
+}
+
 export function getBrowserLocation(): Promise<{ lat: number; lon: number }> {
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
