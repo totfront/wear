@@ -14,6 +14,6 @@ test.describe("Sensitivity", () => {
     await page.waitForTimeout(300);
 
     const coldBtn = page.getByRole("button", { name: "cold" });
-    await expect(coldBtn).toHaveClass(/bg-white/);
+    await expect(coldBtn).toHaveClass(/bg-\[var\(--card\)\]/);
   });
 });

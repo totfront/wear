@@ -51,7 +51,7 @@ export default function Locator({
           aria-label={t().searchAriaLabel}
         />
         {(results.length > 0 || searching) && query.trim() && (
-          <ul className="list-none absolute top-[calc(100%+6px)] left-0 right-0 bg-white/96 backdrop-blur-[12px] border border-[var(--card-line)] rounded-[14px] shadow-[var(--shadow)] overflow-hidden z-10">
+          <ul className="list-none absolute top-[calc(100%+6px)] left-0 right-0 bg-[var(--card)] backdrop-blur-[12px] border border-[var(--card-line)] rounded-[14px] shadow-[var(--shadow)] overflow-hidden z-10">
             {searching && (
               <li className="px-3.5 py-[11px] text-[0.85rem] text-[var(--ink-faint)]">
                 {t().searching}

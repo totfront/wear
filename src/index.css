@@ -34,6 +34,20 @@
   --shadow: 0 1px 2px rgba(28, 26, 23, 0.04), 0 8px 28px rgba(28, 26, 23, 0.07);
 }
 
+.dark {
+  --ink: #e8e4df;
+  --ink-soft: #a39d96;
+  --ink-faint: #706b64;
+  --card: rgba(38, 35, 32);
+  --card-line: rgba(255, 255, 255, 0.08);
+
+  --sky-top: #1a1d24;
+  --sky-bottom: #111316;
+  --accent: #d4845a;
+
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 8px 28px rgba(0, 0, 0, 0.3);
+}
+
 @layer base {
   * { box-sizing: border-box; }
   html, body, #root { height: 100%; }
