@@ -48,12 +48,12 @@ export default function Settings({ onLocaleChange }: SettingsProps) {
 
       {open && (
         <div
-          className="fixed inset-0 z-50 flex items-end justify-center"
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center"
           onClick={() => setOpen(false)}
         >
           <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px]" />
           <div
-            className="relative w-full max-w-[460px] bg-[var(--card)] backdrop-blur-[16px] border border-[var(--card-line)] rounded-t-[24px] shadow-[var(--shadow)] p-6 pb-10 animate-in"
+            className="fixed w-full max-w-[460px] bg-[var(--card)] backdrop-blur-[16px] border border-[var(--card-line)] rounded-t-[24px] sm:rounded-[24px] shadow-[var(--shadow)] p-6 pb-10 sm:pb-6 animate-in bottom-0 sm:bottom-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-5">
