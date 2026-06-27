@@ -15,7 +15,7 @@ const stroke = {
 
 export function HeadIcon({ className }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" className={className} {...stroke}>
+    <svg viewBox="0 -5 24 24" className={className} {...stroke}>
       <path d="M5 11a7 7 0 0 1 14 0" />
       <path d="M4 11h16" />
       <path d="M6.5 11V9.5a5.5 5.5 0 0 1 11 0V11" />
@@ -25,7 +25,7 @@ export function HeadIcon({ className }: IconProps) {
 
 export function UpperIcon({ className }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" className={className} {...stroke}>
+    <svg viewBox="0 -2 24 24" className={className} {...stroke}>
       <path d="M8 3 4 6l2 3 1-1v10h10V8l1 1 2-3-4-3-2 2H10L8 3Z" />
     </svg>
   );

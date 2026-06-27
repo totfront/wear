@@ -14,10 +14,10 @@
 .outfit-thread::before {
   content: '';
   position: absolute;
-  left: 27px;
+  left: 34px;
   top: 30px;
   bottom: 30px;
   width: 2px;
-  background: linear-gradient(var(--accent), transparent 92%);
+  background: linear-gradient(var(--accent));
   opacity: 0.28;
 }
