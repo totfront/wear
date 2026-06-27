@@ -17,6 +17,7 @@ import Outfit from "./components/Outfit/Outfit";
 import UmbrellaBanner from "./components/UmbrellaBanner/UmbrellaBanner";
 import SensitivityToggle from "./components/Sensitivity/Sensitivity";
 import Teaser from "./components/Teaser/Teaser";
+import Settings from "./components/Settings/Settings";
 import "./App.css";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -28,6 +29,7 @@ export default function App() {
   const [placeName, setPlaceName] = useState<string>("");
   const [sensitivity, setSensitivity] = useState<Sensitivity>("normal");
   const [error, setError] = useState<string>("");
+  const [, setLocaleKey] = useState(0);
 
   const loadWeather = useCallback(
     async (lat: number, lon: number, name: string) => {
@@ -106,6 +108,7 @@ export default function App() {
 
   return (
     <main>
+      <Settings onLocaleChange={() => setLocaleKey((k) => k + 1)} />
       <Header />
       <Locator onUseMyLocation={useMyLocation} onSelectCity={loadWeather} />
 

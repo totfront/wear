@@ -1,6 +1,10 @@
 export type Locale = "en" | "ru" | "de" | "uk";
 
 export interface Translations {
+  settings: string;
+  language: string;
+  detailedMode: string;
+  detailedModeDesc: string;
   tagline: string;
   useMyLocation: string;
   searchPlaceholder: string;
@@ -75,6 +79,10 @@ export interface Translations {
 }
 
 const en: Translations = {
+  settings: "Settings",
+  language: "Language",
+  detailedMode: "Detailed recommendations",
+  detailedModeDesc: "Show fabrics, layers, and styling tips",
   tagline: "what to actually put on",
   useMyLocation: "Use my location",
   searchPlaceholder: "or search a city…",
@@ -149,6 +157,10 @@ const en: Translations = {
 };
 
 const ru: Translations = {
+  settings: "Настройки",
+  language: "Язык",
+  detailedMode: "Детальные рекомендации",
+  detailedModeDesc: "Ткани, слои и советы по стилю",
   tagline: "что на самом деле надеть",
   useMyLocation: "Моя геолокация",
   searchPlaceholder: "или найди город…",
@@ -223,6 +235,10 @@ const ru: Translations = {
 };
 
 const de: Translations = {
+  settings: "Einstellungen",
+  language: "Sprache",
+  detailedMode: "Detaillierte Empfehlungen",
+  detailedModeDesc: "Stoffe, Schichten und Styling-Tipps",
   tagline: "was du wirklich anziehen solltest",
   useMyLocation: "Mein Standort",
   searchPlaceholder: "oder Stadt suchen…",
@@ -297,6 +313,10 @@ const de: Translations = {
 };
 
 const uk: Translations = {
+  settings: "Налаштування",
+  language: "Мова",
+  detailedMode: "Детальні рекомендації",
+  detailedModeDesc: "Тканини, шари та поради зі стилю",
   tagline: "що насправді вдягнути",
   useMyLocation: "Моя геолокація",
   searchPlaceholder: "або знайди місто…",
@@ -373,6 +393,8 @@ const uk: Translations = {
 const locales: Record<Locale, Translations> = { en, ru, de, uk };
 
 function detectLocale(): Locale {
+  const saved = localStorage.getItem("wear:locale");
+  if (saved && saved in locales) return saved as Locale;
   const lang = navigator.language.split("-")[0];
   if (lang in locales) return lang as Locale;
   return "en";
