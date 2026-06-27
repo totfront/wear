@@ -1,7 +1,7 @@
 function getEnvironment(): "localhost" | "non-prod" | "prod" {
   const host = window.location.hostname;
   if (host === "localhost" || host === "127.0.0.1") return "localhost";
-  if (host.includes("vercel.app") && !host.startsWith("wear.")) return "prod";
+  if (host.includes("vercel.app") && !host.startsWith("wear.")) return "prod";=
   if (host.includes("preview") || host.includes("staging") || host.includes("dev"))
     return "non-prod";
   return "prod";
