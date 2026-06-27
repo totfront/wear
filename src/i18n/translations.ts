@@ -23,8 +23,9 @@ export interface Translations {
   cold: string;
   average: string;
   warm: string;
-  teaser: string;
-  teaserActual: string;
+  teaserBefore: string;
+  teaserHighlight: string;
+  teaserAfter: string;
   umbrellaMust: string;
   umbrellaShould: string;
   umbrellaNo: string;
@@ -101,8 +102,9 @@ const en: Translations = {
   cold: "cold",
   average: "average",
   warm: "warm",
-  teaser: "Soon: upload your wardrobe and get your",
-  teaserActual: "actual",
+  teaserBefore: "Soon: upload your wardrobe and get your",
+  teaserHighlight: "actual",
+  teaserAfter: "outfit, not just the category.",
   umbrellaMust: "You must have an umbrella",
   umbrellaShould: "You should take an umbrella",
   umbrellaNo: "You do not need an umbrella",
@@ -161,7 +163,7 @@ const ru: Translations = {
   language: "Язык",
   detailedMode: "Детальные рекомендации",
   detailedModeDesc: "Ткани, слои и советы по стилю",
-  tagline: "что на самом деле надеть",
+  tagline: "что на надеть",
   useMyLocation: "Моя геолокация",
   searchPlaceholder: "или найди город…",
   searchAriaLabel: "Поиск города",
@@ -179,8 +181,9 @@ const ru: Translations = {
   cold: "холодно",
   average: "нормально",
   warm: "жарко",
-  teaser: "Скоро: загрузи свой гардероб и получи",
-  teaserActual: "конкретный",
+  teaserBefore: "Скоро: загрузи свой гардероб и получи",
+  teaserHighlight: "конкретный",
+  teaserAfter: "образ, а не просто категорию.",
   umbrellaMust: "Обязательно возьми зонт",
   umbrellaShould: "Лучше взять зонт",
   umbrellaNo: "Зонт не нужен",
@@ -257,8 +260,9 @@ const de: Translations = {
   cold: "kalt",
   average: "normal",
   warm: "warm",
-  teaser: "Bald: lade deine Garderobe hoch und bekomme dein",
-  teaserActual: "echtes",
+  teaserBefore: "Bald: lade deine Garderobe hoch und bekomme dein",
+  teaserHighlight: "echtes",
+  teaserAfter: "Outfit, nicht nur die Kategorie.",
   umbrellaMust: "Du brauchst unbedingt einen Regenschirm",
   umbrellaShould: "Nimm besser einen Regenschirm mit",
   umbrellaNo: "Du brauchst keinen Regenschirm",
@@ -335,8 +339,9 @@ const uk: Translations = {
   cold: "холодно",
   average: "нормально",
   warm: "спекотно",
-  teaser: "Скоро: завантаж свій гардероб і отримай",
-  teaserActual: "конкретний",
+  teaserBefore: "Скоро: завантаж свій гардероб і отримай",
+  teaserHighlight: "конкретний",
+  teaserAfter: "образ, а не просто категорію.",
   umbrellaMust: "Обов'язково візьми парасольку",
   umbrellaShould: "Краще взяти парасольку",
   umbrellaNo: "Парасолька не потрібна",
