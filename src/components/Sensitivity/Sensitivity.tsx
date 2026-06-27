@@ -20,7 +20,7 @@ export default function Sensitivity({ value, onChange }: SensitivityProps) {
         {labels.iFeelLabel}
       </span>
       <div
-        className="flex bg-[rgba(28,26,23,0.06)] rounded-[11px] p-[3px]"
+        className="flex bg-[var(--card-line)] rounded-[11px] p-[3px]"
         role="group"
         aria-label={labels.sensitivityAriaLabel}
       >
@@ -29,7 +29,7 @@ export default function Sensitivity({ value, onChange }: SensitivityProps) {
             key={s.key}
             className={`border-none bg-transparent px-[13px] py-[7px] rounded-lg font-[var(--font-body)] text-[0.82rem] font-medium text-[var(--ink-soft)] cursor-pointer capitalize transition-[background,color] duration-[180ms] ease-in-out focus-visible:outline-2 focus-visible:outline-[var(--accent)] focus-visible:outline-offset-1 ${
               value === s.key
-                ? "bg-white! text-[var(--ink)]! shadow-[0_1px_3px_rgba(28,26,23,0.12)]"
+                ? "bg-[var(--card)]! text-[var(--ink)]! shadow-[0_1px_3px_rgba(28,26,23,0.12)]"
                 : ""
             }`}
             onClick={() => onChange(s.key)}

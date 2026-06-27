@@ -30,6 +30,11 @@ export default function App() {
   const [sensitivity, setSensitivity] = useState<Sensitivity>("normal");
   const [error, setError] = useState<string>("");
   const [, setLocaleKey] = useState(0);
+  const [geoPermission, setGeoPermission] = useState<"unknown" | "granted" | "other">("unknown");
+  const [alwaysShowLocation, setAlwaysShowLocation] = useState(
+    () => localStorage.getItem("wear:always-show-location") === "true"
+  );
+  const [locatorForced, setLocatorForced] = useState(false);
 
   const loadWeather = useCallback(
     async (lat: number, lon: number, name: string) => {
@@ -40,6 +45,7 @@ export default function App() {
         setWeather(w);
         setPlaceName(name);
         setStatus("ready");
+        setLocatorForced(false);
         localStorage.setItem(
           "wear:last-location",
           JSON.stringify({ lat, lon, name }),
@@ -75,6 +81,23 @@ export default function App() {
         /* ignore corrupt data */
       }
     }
+
+    if (navigator.permissions) {
+      navigator.permissions.query({ name: "geolocation" }).then((result) => {
+        setGeoPermission(result.state === "granted" ? "granted" : "other");
+        result.addEventListener("change", () => {
+          setGeoPermission(result.state === "granted" ? "granted" : "other");
+        });
+        if (result.state === "granted") {
+          getBrowserLocation().then(async ({ lat, lon }) => {
+            const name = await reverseGeocode(lat, lon);
+            loadWeather(lat, lon, name);
+          }).catch(() => {});
+        }
+      }).catch(() => setGeoPermission("other"));
+    } else {
+      setGeoPermission("other");
+    }
   }, [loadWeather]);
 
   useEffect(() => {
@@ -105,12 +128,29 @@ export default function App() {
     : null;
 
   const isRecommendationReady = status === "ready" && weather && rec;
+  const geoGranted = geoPermission === "granted";
+  const geoResolved = geoPermission !== "unknown";
+  const hideLocator = geoGranted && !alwaysShowLocation && !locatorForced && status !== "idle";
 
   return (
     <main>
-      <Settings onLocaleChange={() => setLocaleKey((k) => k + 1)} />
+      <Settings
+        onLocaleChange={() => setLocaleKey((k) => k + 1)}
+        onThemeChange={() => {
+          if (weather) {
+            const rec2 = recommend({ temperature: weather.temperature, precipProbability: weather.precipProbability, uvIndex: weather.uvIndex }, sensitivity);
+            const p = paletteFor(rec2.band.name);
+            document.body.style.setProperty("--sky-top", p.skyTop);
+            document.body.style.setProperty("--sky-bottom", p.skyBottom);
+            document.body.style.setProperty("--accent", p.accent);
+          }
+        }}
+        onAlwaysShowLocationChange={setAlwaysShowLocation}
+      />
       <Header />
-      <Locator onUseMyLocation={useMyLocation} onSelectCity={loadWeather} />
+      {geoResolved && !hideLocator && (
+        <Locator onUseMyLocation={useMyLocation} onSelectCity={loadWeather} />
+      )}
 
       {status !== "ready" && (
         <StatusMessage status={status} error={error} />
@@ -118,7 +158,11 @@ export default function App() {
 
       {isRecommendationReady && (
         <div key={placeName}>
-          <WeatherContext weather={weather} placeName={placeName} />
+          <WeatherContext
+            weather={weather}
+            placeName={placeName}
+            onChangeLocation={hideLocator ? () => setLocatorForced(true) : undefined}
+          />
           <Verdict bandName={rec.band.name} raining={weather.precipProbability >= 40 && weather.temperature > 1} />
           <Outfit zones={rec.zones} />
           <UmbrellaBanner precipProbability={weather.precipProbability} />

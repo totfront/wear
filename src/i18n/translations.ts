@@ -23,6 +23,9 @@ export interface Translations {
   cold: string;
   average: string;
   warm: string;
+  changeLocation: string;
+  alwaysShowLocation: string;
+  alwaysShowLocationDesc: string;
   teaserBefore: string;
   teaserHighlight: string;
   teaserAfter: string;
@@ -48,6 +51,10 @@ export interface Translations {
   blurbChilly: string;
   blurbCold: string;
   blurbFreezing: string;
+  theme: string;
+  themeLight: string;
+  themeDark: string;
+  themeSystem: string;
   grabUmbrella: string;
   cap: string;
   noCap: string;
@@ -102,6 +109,9 @@ const en: Translations = {
   cold: "cold",
   average: "average",
   warm: "warm",
+  changeLocation: "change",
+  alwaysShowLocation: "Always show location picker",
+  alwaysShowLocationDesc: "Show the location search even when geolocation is allowed",
   teaserBefore: "Soon: upload your wardrobe and get your",
   teaserHighlight: "actual",
   teaserAfter: "outfit, not just the category.",
@@ -127,6 +137,10 @@ const en: Translations = {
   blurbChilly: "Layer up, bring a jacket",
   blurbCold: "Warm coat and a hat",
   blurbFreezing: "Full winter gear, cover everything",
+  theme: "Theme",
+  themeLight: "Light",
+  themeDark: "Dark",
+  themeSystem: "System",
   grabUmbrella: ", and grab an umbrella",
   cap: "Cap",
   noCap: "No cap",
@@ -163,9 +177,9 @@ const ru: Translations = {
   language: "Язык",
   detailedMode: "Детальные рекомендации",
   detailedModeDesc: "Ткани, слои и советы по стилю",
-  tagline: "что на надеть",
-  useMyLocation: "Моя геолокация",
-  searchPlaceholder: "или найди город…",
+  tagline: "Что надеть",
+  useMyLocation: "Определить геолокацию",
+  searchPlaceholder: "Или выбрать город",
   searchAriaLabel: "Поиск города",
   searching: "Ищу…",
   idleMessage: "Скажи, где ты, и я скажу, что надеть.",
@@ -173,7 +187,7 @@ const ru: Translations = {
   loadingWeather: "Читаю небо…",
   connectionError: "Не удалось загрузить погоду. Проверь соединение и попробуй снова.",
   locationError: "Геолокация отключена. Найди город через поиск.",
-  feels: "ощущается",
+  feels: "Ощущается",
   rain: "дождь",
   humidity: "влажность",
   iFeelLabel: "Мне обычно",
@@ -181,6 +195,9 @@ const ru: Translations = {
   cold: "холодно",
   average: "нормально",
   warm: "жарко",
+  changeLocation: "изменить",
+  alwaysShowLocation: "Всегда показывать выбор локации",
+  alwaysShowLocationDesc: "Показывать поиск, даже если геолокация разрешена",
   teaserBefore: "Скоро: загрузи свой гардероб и получи",
   teaserHighlight: "конкретный",
   teaserAfter: "образ, а не просто категорию.",
@@ -206,6 +223,10 @@ const ru: Translations = {
   blurbChilly: "Одевайся слоями, бери куртку",
   blurbCold: "Тёплое пальто и шапка",
   blurbFreezing: "Полная зимняя экипировка",
+  theme: "Тема",
+  themeLight: "Светлая",
+  themeDark: "Тёмная",
+  themeSystem: "Система",
   grabUmbrella: ", и захвати зонт",
   cap: "Кепка",
   noCap: "Без кепки",
@@ -260,6 +281,9 @@ const de: Translations = {
   cold: "kalt",
   average: "normal",
   warm: "warm",
+  changeLocation: "ändern",
+  alwaysShowLocation: "Standortauswahl immer anzeigen",
+  alwaysShowLocationDesc: "Suche anzeigen, auch wenn Standort erlaubt ist",
   teaserBefore: "Bald: lade deine Garderobe hoch und bekomme dein",
   teaserHighlight: "echtes",
   teaserAfter: "Outfit, nicht nur die Kategorie.",
@@ -285,6 +309,10 @@ const de: Translations = {
   blurbChilly: "Schichten anziehen, Jacke mitnehmen",
   blurbCold: "Warmer Mantel und Mütze",
   blurbFreezing: "Volle Winterausrüstung",
+  theme: "Design",
+  themeLight: "Hell",
+  themeDark: "Dunkel",
+  themeSystem: "System",
   grabUmbrella: ", und nimm einen Regenschirm mit",
   cap: "Kappe",
   noCap: "Keine Kappe",
@@ -339,6 +367,9 @@ const uk: Translations = {
   cold: "холодно",
   average: "нормально",
   warm: "спекотно",
+  changeLocation: "змінити",
+  alwaysShowLocation: "Завжди показувати вибір локації",
+  alwaysShowLocationDesc: "Показувати пошук, навіть якщо геолокація дозволена",
   teaserBefore: "Скоро: завантаж свій гардероб і отримай",
   teaserHighlight: "конкретний",
   teaserAfter: "образ, а не просто категорію.",
@@ -364,6 +395,10 @@ const uk: Translations = {
   blurbChilly: "Вдягайся шарами, бери куртку",
   blurbCold: "Тепле пальто і шапка",
   blurbFreezing: "Повна зимова екіпіровка",
+  theme: "Тема",
+  themeLight: "Світла",
+  themeDark: "Темна",
+  themeSystem: "Система",
   grabUmbrella: ", і візьми парасольку",
   cap: "Кепка",
   noCap: "Без кепки",
