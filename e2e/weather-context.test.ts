@@ -6,6 +6,7 @@ test.describe("WeatherContext", () => {
     await page.evaluate(() => localStorage.clear());
     await page.reload();
     await page.getByLabel("Search for a city").fill("Berlin");
+    await expect(page.getByText("Germany")).toBeVisible({ timeout: 10000 });
     await page.getByText("Germany").first().click();
     await expect(page.getByText("Berlin")).toBeVisible({ timeout: 10000 });
     await expect(page.getByText(/feels \d+°/)).toBeVisible();

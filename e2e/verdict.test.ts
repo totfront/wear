@@ -6,6 +6,7 @@ test.describe("Verdict", () => {
     await page.evaluate(() => localStorage.clear());
     await page.reload();
     await page.getByLabel("Search for a city").fill("Paris");
+    await expect(page.getByText("France")).toBeVisible({ timeout: 10000 });
     await page.getByText("France").first().click();
     await expect(
       page.getByText(/(Hot|Warm|Mild|Cool|Chilly|Cold|Freezing)/)

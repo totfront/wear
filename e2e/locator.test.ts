@@ -18,6 +18,7 @@ test.describe("Locator", () => {
     await page.evaluate(() => localStorage.clear());
     await page.reload();
     await page.getByLabel("Search for a city").fill("London");
+    await expect(page.getByText("United Kingdom")).toBeVisible({ timeout: 10000 });
     await page.getByText("United Kingdom").first().click();
     await expect(page.getByText("London")).toBeVisible({ timeout: 10000 });
     await expect(page.getByText(/% rain/)).toBeVisible();

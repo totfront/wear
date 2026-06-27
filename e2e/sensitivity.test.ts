@@ -6,6 +6,7 @@ test.describe("Sensitivity", () => {
     await page.evaluate(() => localStorage.clear());
     await page.reload();
     await page.getByLabel("Search for a city").fill("Oslo");
+    await expect(page.getByText("Norway")).toBeVisible({ timeout: 10000 });
     await page.getByText("Norway").first().click();
     await expect(page.getByText("I tend to feel")).toBeVisible({ timeout: 10000 });
 

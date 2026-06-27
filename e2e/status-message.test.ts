@@ -15,6 +15,7 @@ test.describe("StatusMessage", () => {
     await page.evaluate(() => localStorage.clear());
     await page.reload();
     await page.getByLabel("Search for a city").fill("Tokyo");
+    await expect(page.getByText("Japan").first()).toBeVisible({ timeout: 10000 });
     await page.getByText("Japan").first().click();
     await expect(page.getByText("Reading the sky…")).toBeVisible();
   });
