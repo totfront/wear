@@ -20,6 +20,7 @@ const LOCALE_LABELS: { key: Locale; flag: string; label: string }[] = [
   { key: "ru", flag: "🇷🇺", label: "Русский" },
   { key: "de", flag: "🇩🇪", label: "Deutsch" },
   { key: "uk", flag: "🇺🇦", label: "Українська" },
+  { key: "lv", flag: "🇱🇻", label: "Latviešu" },
 ];
 
 interface SettingsProps {
