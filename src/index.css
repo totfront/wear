@@ -50,7 +50,7 @@
 
 @layer base {
   * { box-sizing: border-box; }
-  html, body, #root { height: 100%; }
+  html, body, #root { min-height: 100%; }
 
   body {
     font-family: var(--font-body);
