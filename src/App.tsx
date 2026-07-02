@@ -195,7 +195,7 @@ export default function App() {
             onChangeLocation={hideLocator ? () => setLocatorForced(true) : undefined}
             prioritizeFeelsLike={prioritizeFeelsLike}
           />
-          <Verdict bandName={rec.band.name} raining={weather.precipProbability >= 40 && weather.temperature > 1} />
+          <Verdict bandName={rec.band.name} raining={weather.precipProbability >= 40 && weather.temperature > 1} windSpeed={weather.windSpeed} precipProbability={weather.precipProbability} />
           <Outfit zones={rec.zones} />
           <RainGauge probability={weather.precipProbability} />
           <SensitivityToggle value={sensitivity} onChange={(v) => { setSensitivity(v); localStorage.setItem("wear:sensitivity", v); }} />

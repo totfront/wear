@@ -61,7 +61,8 @@ export interface Translations {
   themeSystem: string;
   grabUmbrella: string;
   tipHot: string;
-  tipCold: string;
+  tipWindy: string;
+  tipWetCold: string;
   cap: string;
   noCap: string;
   noHat: string;
@@ -156,7 +157,8 @@ const en: Translations = {
   themeSystem: "System",
   grabUmbrella: ", and grab an umbrella",
   tipHot: "Stay hydrated and don't forget your SPF ☀️",
-  tipCold: "Stay warm — a hot drink helps 🍵",
+  tipWindy: "Windy out there 💨",
+  tipWetCold: "Wet and cold — not the best combo 🥶",
   cap: "Cap",
   noCap: "No cap",
   noHat: "No hat",
@@ -251,7 +253,8 @@ const ru: Translations = {
   themeSystem: "Система",
   grabUmbrella: ", и захвати зонт",
   tipHot: "Не забудь воды и SPF ☀️",
-  tipCold: "Согрейся — горячий напиток не помешает 🍵",
+  tipWindy: "На улице ветрено 💨",
+  tipWetCold: "Мокро и холодно — не лучшая комбо 🥶",
   cap: "Кепка",
   noCap: "Без кепки",
   noHat: "Без шапки",
@@ -346,7 +349,8 @@ const de: Translations = {
   themeSystem: "System",
   grabUmbrella: ", und nimm einen Regenschirm mit",
   tipHot: "Bleib hydratisiert und vergiss dein Sonnenschutzmittel nicht ☀️",
-  tipCold: "Bleib warm — ein heißes Getränk hilft 🍵",
+  tipWindy: "Es ist windig draußen 💨",
+  tipWetCold: "Nass und kalt — keine gute Kombination 🥶",
   cap: "Kappe",
   noCap: "Keine Kappe",
   noHat: "Keine Mütze",
@@ -441,7 +445,8 @@ const uk: Translations = {
   themeSystem: "Система",
   grabUmbrella: ", і візьми парасольку",
   tipHot: "Не забудь воду та SPF ☀️",
-  tipCold: "Зігрійся — гаряча кава не завадить 🍵",
+  tipWindy: "На вулиці вітряно 💨",
+  tipWetCold: "Мокро і холодно — не найкраще поєднання 🥶",
   cap: "Кепка",
   noCap: "Без кепки",
   noHat: "Без шапки",
@@ -536,7 +541,8 @@ const lv: Translations = {
   themeSystem: "Sistēma",
   grabUmbrella: ", un paņem lietussargu",
   tipHot: "Neaizmirsti ūdeni un sauļošanās krēmu ☀️",
-  tipCold: "Saglabājies silts — karsts dzēriens palīdzēs 🍵",
+  tipWindy: "Ārā ir vējains 💨",
+  tipWetCold: "Slapjš un auksts — ne labākā kombinācija 🥶",
   cap: "Cepure",
   noCap: "Bez cepures",
   noHat: "Bez cepures",
