@@ -6,19 +6,25 @@ interface WeatherContextProps {
   weather: CurrentWeather;
   placeName: string;
   onChangeLocation?: () => void;
+  prioritizeFeelsLike?: boolean;
 }
 
 export default function WeatherContext({
   weather,
   placeName,
   onChangeLocation,
+  prioritizeFeelsLike = false,
 }: WeatherContextProps) {
+  const primary = prioritizeFeelsLike ? weather.apparentTemperature : weather.temperature;
+  const secondary = prioritizeFeelsLike ? weather.temperature : weather.apparentTemperature;
+  const secondaryLabel = prioritizeFeelsLike ? "actual" : t().feels;
+
   return (
     <section className="animate-in text-center mb-[18px]">
       <div className="font-[var(--font-display)] text-[4rem] font-medium leading-none tracking-[-0.03em] text-[var(--ink)]">
-        {formatTemp(weather.temperature)}
+        {formatTemp(primary)}
         <span className="block font-[var(--font-body)] text-[0.78rem] text-[var(--ink-faint)] tracking-[0.02em] mt-1.5">
-          {t().feels} {formatTemp(weather.apparentTemperature)} · ↑ {formatTemp(weather.peakTemperature)}
+          {secondaryLabel} {formatTemp(secondary)} · ↑ {formatTemp(weather.peakTemperature)}
         </span>
       </div>
       <div className="text-[0.78rem] text-[var(--ink-faint)] mt-0.5">

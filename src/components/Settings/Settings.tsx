@@ -27,22 +27,27 @@ const LOCALE_LABELS: { key: Locale; flag: string; label: string }[] = [
 interface SettingsProps {
   onLocaleChange: () => void;
   onThemeChange?: () => void;
-  onAlwaysShowLocationChange?: (value: boolean) => void;
+  onHideLocationChange?: (value: boolean) => void;
   onTempUnitChange?: () => void;
+  onFeelsLikePriorityChange?: (value: boolean) => void;
 }
 
 export default function Settings({
   onLocaleChange,
   onThemeChange,
-  onAlwaysShowLocationChange,
+  onHideLocationChange,
   onTempUnitChange,
+  onFeelsLikePriorityChange,
 }: SettingsProps) {
   const [open, setOpen] = useState(false);
   const [currentLocale, setCurrentLocale] = useState(getLocale());
   const [currentTheme, setCurrentTheme] = useState<Theme>(getStoredTheme);
   const [currentTempUnit, setCurrentTempUnit] = useState<TempUnit>(getTempUnit);
-  const [alwaysShowLocation, setAlwaysShowLocation] = useState(
-    () => localStorage.getItem("wear:always-show-location") === "true",
+  const [hideLocation, setHideLocation] = useState(
+    () => localStorage.getItem("wear:hide-location") !== "false",
+  );
+  const [prioritizeFeelsLike, setPrioritizeFeelsLike] = useState(
+    () => localStorage.getItem("wear:prioritize-feels-like") === "true",
   );
   const labels = t();
 
@@ -212,33 +217,64 @@ export default function Settings({
               <div className="flex items-center justify-between">
                 <div>
                   <div className="text-[0.78rem] uppercase tracking-[0.09em] text-[var(--ink-faint)] font-semibold mb-1">
-                    {labels.alwaysShowLocation}
+                    {labels.hideLocation}
                   </div>
                   <div className="text-[0.78rem] text-[var(--ink-faint)]">
-                    {labels.alwaysShowLocationDesc}
+                    {labels.hideLocationDesc}
                   </div>
                 </div>
                 <button
                   className="relative ml-4 shrink-0 w-11 h-6 rounded-full border-none cursor-pointer transition-colors duration-200"
                   style={{
-                    background: alwaysShowLocation
+                    background: hideLocation
                       ? "var(--accent)"
                       : "var(--card-line)",
                   }}
                   onClick={() => {
-                    const next = !alwaysShowLocation;
-                    setAlwaysShowLocation(next);
-                    localStorage.setItem(
-                      "wear:always-show-location",
-                      String(next),
-                    );
-                    onAlwaysShowLocationChange?.(next);
+                    const next = !hideLocation;
+                    setHideLocation(next);
+                    localStorage.setItem("wear:hide-location", String(next));
+                    onHideLocationChange?.(next);
                   }}
                 >
                   <div
                     className="absolute top-0.5 w-5 h-5 rounded-full bg-white shadow-sm transition-[left] duration-200"
                     style={{
-                      left: alwaysShowLocation ? "calc(100% - 22px)" : "2px",
+                      left: hideLocation ? "calc(100% - 22px)" : "2px",
+                    }}
+                  />
+                </button>
+              </div>
+            </div>
+
+            <div className="mb-5">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-[0.78rem] uppercase tracking-[0.09em] text-[var(--ink-faint)] font-semibold mb-1">
+                    {labels.prioritizeFeelsLike}
+                  </div>
+                  <div className="text-[0.78rem] text-[var(--ink-faint)]">
+                    {labels.prioritizeFeelsLikeDesc}
+                  </div>
+                </div>
+                <button
+                  className="relative ml-4 shrink-0 w-11 h-6 rounded-full border-none cursor-pointer transition-colors duration-200"
+                  style={{
+                    background: prioritizeFeelsLike
+                      ? "var(--accent)"
+                      : "var(--card-line)",
+                  }}
+                  onClick={() => {
+                    const next = !prioritizeFeelsLike;
+                    setPrioritizeFeelsLike(next);
+                    localStorage.setItem("wear:prioritize-feels-like", String(next));
+                    onFeelsLikePriorityChange?.(next);
+                  }}
+                >
+                  <div
+                    className="absolute top-0.5 w-5 h-5 rounded-full bg-white shadow-sm transition-[left] duration-200"
+                    style={{
+                      left: prioritizeFeelsLike ? "calc(100% - 22px)" : "2px",
                     }}
                   />
                 </button>

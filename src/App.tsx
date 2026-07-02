@@ -27,13 +27,18 @@ export default function App() {
   const [status, setStatus] = useState<Status>("idle");
   const [weather, setWeather] = useState<CurrentWeather | null>(null);
   const [placeName, setPlaceName] = useState<string>("");
-  const [sensitivity, setSensitivity] = useState<Sensitivity>("normal");
+  const [sensitivity, setSensitivity] = useState<Sensitivity>(
+    () => (localStorage.getItem("wear:sensitivity") as Sensitivity) || "normal"
+  );
   const [error, setError] = useState<string>("");
   const [, setLocaleKey] = useState(0);
   const [, setTempUnitKey] = useState(0);
   const [geoPermission, setGeoPermission] = useState<"unknown" | "granted" | "other">("unknown");
-  const [alwaysShowLocation, setAlwaysShowLocation] = useState(
-    () => localStorage.getItem("wear:always-show-location") === "true"
+  const [hideLocation, setHideLocation] = useState(
+    () => localStorage.getItem("wear:hide-location") !== "false"
+  );
+  const [prioritizeFeelsLike, setPrioritizeFeelsLike] = useState(
+    () => localStorage.getItem("wear:prioritize-feels-like") === "true"
   );
   const [locatorForced, setLocatorForced] = useState(false);
 
@@ -154,7 +159,7 @@ export default function App() {
   const isRecommendationReady = status === "ready" && weather && rec;
   const geoGranted = geoPermission === "granted";
   const geoResolved = geoPermission !== "unknown";
-  const hideLocator = geoGranted && !alwaysShowLocation && !locatorForced;
+  const hideLocator = hideLocation && !locatorForced && (geoGranted || status === "ready");
 
   return (
     <main>
@@ -169,8 +174,9 @@ export default function App() {
             document.body.style.setProperty("--accent", p.accent);
           }
         }}
-        onAlwaysShowLocationChange={setAlwaysShowLocation}
+        onHideLocationChange={setHideLocation}
         onTempUnitChange={() => setTempUnitKey((k) => k + 1)}
+        onFeelsLikePriorityChange={setPrioritizeFeelsLike}
       />
       <Header />
       {geoResolved && !hideLocator && (
@@ -187,11 +193,12 @@ export default function App() {
             weather={weather}
             placeName={placeName}
             onChangeLocation={hideLocator ? () => setLocatorForced(true) : undefined}
+            prioritizeFeelsLike={prioritizeFeelsLike}
           />
           <Verdict bandName={rec.band.name} raining={weather.precipProbability >= 40 && weather.temperature > 1} />
           <Outfit zones={rec.zones} />
           <RainGauge probability={weather.precipProbability} />
-          <SensitivityToggle value={sensitivity} onChange={setSensitivity} />
+          <SensitivityToggle value={sensitivity} onChange={(v) => { setSensitivity(v); localStorage.setItem("wear:sensitivity", v); }} />
           <Teaser />
         </div>
       )}
