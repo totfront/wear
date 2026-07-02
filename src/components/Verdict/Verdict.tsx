@@ -6,7 +6,7 @@ interface VerdictProps {
 }
 
 export default function Verdict({ bandName, raining }: VerdictProps) {
-  let summary = `${getBandName(bandName)} — ${getBandBlurb(bandName)}`;
+  let summary = `${getBandName(bandName)} – ${getBandBlurb(bandName)}`;
   if (raining) summary += t().grabUmbrella;
 
   return (

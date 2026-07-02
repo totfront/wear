@@ -12,6 +12,8 @@ export interface CurrentWeather {
   windSpeed: number;
   weatherCode: number;
   isDay: boolean;
+  peakTemperature: number;
+  peakHumidity: number;
 }
 
 export interface Place {
@@ -33,12 +35,14 @@ export async function fetchWeather(lat: number, lon: number): Promise<CurrentWea
       'temperature_2m',
       'apparent_temperature',
       'relative_humidity_2m',
-      'precipitation_probability',
       'uv_index',
       'wind_speed_10m',
       'weather_code',
       'is_day',
     ].join(','),
+    hourly: ['temperature_2m', 'relative_humidity_2m'].join(','),
+    forecast_hours: '24',
+    daily: 'precipitation_probability_max',
     timezone: 'auto',
   });
 
@@ -47,15 +51,20 @@ export async function fetchWeather(lat: number, lon: number): Promise<CurrentWea
   const data = await res.json();
   const c = data.current;
 
+  const hourlyTemps: number[] = data.hourly?.temperature_2m ?? [];
+  const hourlyHumidity: number[] = data.hourly?.relative_humidity_2m ?? [];
+
   return {
     temperature: c.temperature_2m,
     apparentTemperature: c.apparent_temperature,
-    precipProbability: c.precipitation_probability ?? 0,
+    precipProbability: data.daily?.precipitation_probability_max?.[0] ?? 0,
     uvIndex: c.uv_index ?? 0,
     humidity: c.relative_humidity_2m,
     windSpeed: c.wind_speed_10m,
     weatherCode: c.weather_code,
     isDay: c.is_day === 1,
+    peakTemperature: hourlyTemps.length ? Math.max(...hourlyTemps) : c.temperature_2m,
+    peakHumidity: hourlyHumidity.length ? Math.max(...hourlyHumidity) : c.relative_humidity_2m,
   };
 }
 

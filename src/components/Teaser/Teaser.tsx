@@ -7,7 +7,7 @@ export default function Teaser() {
       <p className="text-[0.84rem] text-[var(--ink-soft)] leading-normal">
         🚧 {labels.teaserBefore}{" "}
         <em className="text-[var(--accent)] italic">{labels.teaserHighlight}</em>{" "}
-        {labels.teaserAfter} 🚧
+        {labels.teaserAfter}
       </p>
     </section>
   );

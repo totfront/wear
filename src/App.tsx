@@ -14,7 +14,7 @@ import StatusMessage from "./components/StatusMessage/StatusMessage";
 import WeatherContext from "./components/WeatherContext/WeatherContext";
 import Verdict from "./components/Verdict/Verdict";
 import Outfit from "./components/Outfit/Outfit";
-import UmbrellaBanner from "./components/UmbrellaBanner/UmbrellaBanner";
+import RainGauge from "./components/RainGauge/RainGauge";
 import SensitivityToggle from "./components/Sensitivity/Sensitivity";
 import Teaser from "./components/Teaser/Teaser";
 import Settings from "./components/Settings/Settings";
@@ -30,6 +30,7 @@ export default function App() {
   const [sensitivity, setSensitivity] = useState<Sensitivity>("normal");
   const [error, setError] = useState<string>("");
   const [, setLocaleKey] = useState(0);
+  const [, setTempUnitKey] = useState(0);
   const [geoPermission, setGeoPermission] = useState<"unknown" | "granted" | "other">("unknown");
   const [alwaysShowLocation, setAlwaysShowLocation] = useState(
     () => localStorage.getItem("wear:always-show-location") === "true"
@@ -50,6 +51,11 @@ export default function App() {
           "wear:last-location",
           JSON.stringify({ lat, lon, name }),
         );
+        const url = new URL(window.location.href);
+        url.searchParams.set("lat", String(lat));
+        url.searchParams.set("lon", String(lon));
+        url.searchParams.set("name", name);
+        history.replaceState(null, "", url);
       } catch {
         setError(t().connectionError);
         setStatus("error");
@@ -72,6 +78,16 @@ export default function App() {
   }, [loadWeather]);
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const urlLat = parseFloat(params.get("lat") ?? "");
+    const urlLon = parseFloat(params.get("lon") ?? "");
+    const urlName = params.get("name") ?? "";
+    if (!isNaN(urlLat) && !isNaN(urlLon)) {
+      setGeoPermission("other");
+      loadWeather(urlLat, urlLon, urlName || "Shared location");
+      return;
+    }
+
     const loadFromCache = () => {
       const saved = localStorage.getItem("wear:last-location");
       if (saved) {
@@ -154,6 +170,7 @@ export default function App() {
           }
         }}
         onAlwaysShowLocationChange={setAlwaysShowLocation}
+        onTempUnitChange={() => setTempUnitKey((k) => k + 1)}
       />
       <Header />
       {geoResolved && !hideLocator && (
@@ -173,7 +190,7 @@ export default function App() {
           />
           <Verdict bandName={rec.band.name} raining={weather.precipProbability >= 40 && weather.temperature > 1} />
           <Outfit zones={rec.zones} />
-          <UmbrellaBanner precipProbability={weather.precipProbability} />
+          <RainGauge probability={weather.precipProbability} />
           <SensitivityToggle value={sensitivity} onChange={setSensitivity} />
           <Teaser />
         </div>

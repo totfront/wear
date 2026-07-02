@@ -9,9 +9,11 @@ test.describe("WeatherContext", () => {
     await expect(page.getByText("Germany")).toBeVisible({ timeout: 10000 });
     await page.getByText("Germany").first().click();
     await expect(page.getByText("Berlin")).toBeVisible({ timeout: 10000 });
-    await expect(page.getByText(/feels \d+°/)).toBeVisible();
-    await expect(page.getByText(/% rain/)).toBeVisible();
+    await expect(page.getByText(/feels \d+°C/)).toBeVisible();
+    await expect(page.getByText(/↑ \d+°C/)).toBeVisible();
     await expect(page.getByText(/% humidity/)).toBeVisible();
-    await expect(page.getByText(/UV \d/)).toBeVisible();
+    // UV and rain % are no longer displayed
+    await expect(page.getByText(/UV \d/)).not.toBeVisible();
+    await expect(page.getByText(/% rain/)).not.toBeVisible();
   });
 });
