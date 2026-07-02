@@ -60,6 +60,8 @@ export interface Translations {
   themeDark: string;
   themeSystem: string;
   grabUmbrella: string;
+  tipHot: string;
+  tipCold: string;
   cap: string;
   noCap: string;
   noHat: string;
@@ -153,6 +155,8 @@ const en: Translations = {
   themeDark: "Dark",
   themeSystem: "System",
   grabUmbrella: ", and grab an umbrella",
+  tipHot: "Stay hydrated and don't forget your SPF ☀️",
+  tipCold: "Stay warm — a hot drink helps 🍵",
   cap: "Cap",
   noCap: "No cap",
   noHat: "No hat",
@@ -246,6 +250,8 @@ const ru: Translations = {
   themeDark: "Тёмная",
   themeSystem: "Система",
   grabUmbrella: ", и захвати зонт",
+  tipHot: "Не забудь воды и SPF ☀️",
+  tipCold: "Согрейся — горячий напиток не помешает 🍵",
   cap: "Кепка",
   noCap: "Без кепки",
   noHat: "Без шапки",
@@ -339,6 +345,8 @@ const de: Translations = {
   themeDark: "Dunkel",
   themeSystem: "System",
   grabUmbrella: ", und nimm einen Regenschirm mit",
+  tipHot: "Bleib hydratisiert und vergiss dein Sonnenschutzmittel nicht ☀️",
+  tipCold: "Bleib warm — ein heißes Getränk hilft 🍵",
   cap: "Kappe",
   noCap: "Keine Kappe",
   noHat: "Keine Mütze",
@@ -432,6 +440,8 @@ const uk: Translations = {
   themeDark: "Темна",
   themeSystem: "Система",
   grabUmbrella: ", і візьми парасольку",
+  tipHot: "Не забудь воду та SPF ☀️",
+  tipCold: "Зігрійся — гаряча кава не завадить 🍵",
   cap: "Кепка",
   noCap: "Без кепки",
   noHat: "Без шапки",
@@ -525,6 +535,8 @@ const lv: Translations = {
   themeDark: "Tumšā",
   themeSystem: "Sistēma",
   grabUmbrella: ", un paņem lietussargu",
+  tipHot: "Neaizmirsti ūdeni un sauļošanās krēmu ☀️",
+  tipCold: "Saglabājies silts — karsts dzēriens palīdzēs 🍵",
   cap: "Cepure",
   noCap: "Bez cepures",
   noHat: "Bez cepures",
