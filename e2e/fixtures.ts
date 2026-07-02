@@ -48,11 +48,17 @@ const MOCK_WEATHER = {
     temperature_2m: 22,
     apparent_temperature: 24,
     relative_humidity_2m: 55,
-    precipitation_probability: 10,
     uv_index: 5,
     wind_speed_10m: 12,
     weather_code: 1,
     is_day: 1,
+  },
+  daily: {
+    precipitation_probability_max: [40],
+  },
+  hourly: {
+    temperature_2m: Array(24).fill(22).map((v, i) => v + i * 0.3),   // peaks at ~28
+    relative_humidity_2m: Array(24).fill(55).map((v, i) => v + i),    // peaks at ~78
   },
 };
 

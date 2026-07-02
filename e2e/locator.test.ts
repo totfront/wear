@@ -21,6 +21,6 @@ test.describe("Locator", () => {
     await expect(page.getByText("United Kingdom")).toBeVisible({ timeout: 10000 });
     await page.getByText("United Kingdom").first().click();
     await expect(page.getByText("London")).toBeVisible({ timeout: 10000 });
-    await expect(page.getByText(/% rain/)).toBeVisible();
+    await expect(page.getByText(/% humidity/)).toBeVisible();
   });
 });
