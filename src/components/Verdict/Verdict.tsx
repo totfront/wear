@@ -7,7 +7,7 @@ interface VerdictProps {
   precipProbability: number;
 }
 
-function getTips(bandName: string, raining: boolean, windSpeed: number, precipProbability: number): string[] {
+function getTips(bandName: string, _raining: boolean, windSpeed: number, precipProbability: number): string[] {
   const b = bandName.toLowerCase();
   const tips: string[] = [];
   if (b === "hot" || b === "warm") tips.push(t().tipHot);
