@@ -84,6 +84,7 @@ export interface Translations {
   insulatedBoots: string;
   lightBeanie: string;
   beanie: string;
+  temperatureUnit: string;
 }
 
 const en: Translations = {
@@ -170,6 +171,7 @@ const en: Translations = {
   insulatedBoots: "Insulated boots",
   lightBeanie: "Light beanie",
   beanie: "Beanie",
+  temperatureUnit: "Temperature unit",
 };
 
 const ru: Translations = {
@@ -256,6 +258,7 @@ const ru: Translations = {
   insulatedBoots: "Утеплённые ботинки",
   lightBeanie: "Лёгкая шапка",
   beanie: "Шапка",
+  temperatureUnit: "Единица температуры",
 };
 
 const de: Translations = {
@@ -342,6 +345,7 @@ const de: Translations = {
   insulatedBoots: "Gefütterte Stiefel",
   lightBeanie: "Leichte Mütze",
   beanie: "Mütze",
+  temperatureUnit: "Temperatureinheit",
 };
 
 const uk: Translations = {
@@ -428,6 +432,7 @@ const uk: Translations = {
   insulatedBoots: "Утеплені черевики",
   lightBeanie: "Легка шапка",
   beanie: "Шапка",
+  temperatureUnit: "Одиниця температури",
 };
 
 const lv: Translations = {
@@ -514,6 +519,7 @@ const lv: Translations = {
   insulatedBoots: "Siltināti zābaki",
   lightBeanie: "Viegla cepure",
   beanie: "Cepure",
+  temperatureUnit: "Temperatūras vienība",
 };
 
 const locales: Record<Locale, Translations> = { en, ru, de, uk, lv };

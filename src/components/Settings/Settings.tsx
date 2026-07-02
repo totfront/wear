@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { type Locale, t, getLocale, setLocale } from "../../i18n/translations";
+import { type TempUnit, getTempUnit, setTempUnit } from "../../utils/temperature";
 
 type Theme = "light" | "dark" | "system";
 
@@ -27,16 +28,19 @@ interface SettingsProps {
   onLocaleChange: () => void;
   onThemeChange?: () => void;
   onAlwaysShowLocationChange?: (value: boolean) => void;
+  onTempUnitChange?: () => void;
 }
 
 export default function Settings({
   onLocaleChange,
   onThemeChange,
   onAlwaysShowLocationChange,
+  onTempUnitChange,
 }: SettingsProps) {
   const [open, setOpen] = useState(false);
   const [currentLocale, setCurrentLocale] = useState(getLocale());
   const [currentTheme, setCurrentTheme] = useState<Theme>(getStoredTheme);
+  const [currentTempUnit, setCurrentTempUnit] = useState<TempUnit>(getTempUnit);
   const [alwaysShowLocation, setAlwaysShowLocation] = useState(
     () => localStorage.getItem("wear:always-show-location") === "true",
   );
@@ -64,6 +68,12 @@ export default function Settings({
     setCurrentLocale(locale);
     localStorage.setItem("wear:locale", locale);
     onLocaleChange();
+  };
+
+  const handleTempUnitChange = (unit: TempUnit) => {
+    setTempUnit(unit);
+    setCurrentTempUnit(unit);
+    onTempUnitChange?.();
   };
 
   return (
@@ -157,6 +167,27 @@ export default function Settings({
 
             <div className="mb-5">
               <div className="text-[0.78rem] uppercase tracking-[0.09em] text-[var(--ink-faint)] font-semibold mb-2">
+                {labels.temperatureUnit}
+              </div>
+              <div className="flex gap-2">
+                {(["C", "F"] as TempUnit[]).map((unit) => (
+                  <button
+                    key={unit}
+                    className={`px-4 py-2 rounded-xl border text-[0.88rem] font-medium cursor-pointer transition-all duration-150 ${
+                      currentTempUnit === unit
+                        ? "bg-[var(--accent)] text-white border-[var(--accent)] shadow-[0_1px_3px_rgba(28,26,23,0.12)]"
+                        : "bg-transparent text-[var(--ink)] border-[var(--card-line)] hover:bg-[rgba(28,26,23,0.04)]"
+                    }`}
+                    onClick={() => handleTempUnitChange(unit)}
+                  >
+                    °{unit}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="mb-5">
+              <div className="text-[0.78rem] uppercase tracking-[0.09em] text-[var(--ink-faint)] font-semibold mb-2">
                 {labels.language}
               </div>
               <div className="flex gap-2 flex-wrap">
@@ -218,7 +249,7 @@ export default function Settings({
               <div className="flex items-center justify-between">
                 <div>
                   <div className="text-[0.78rem] uppercase tracking-[0.09em] text-[var(--ink-faint)] font-semibold mb-1">
-                    🚧 {labels.detailedMode} 🚧
+                    🚧 Soon: {labels.detailedMode}
                   </div>
                   <div className="text-[0.78rem] text-[var(--ink-faint)]">
                     {labels.detailedModeDesc}
