@@ -32,6 +32,10 @@ export interface Translations {
   umbrellaMust: string;
   umbrellaShould: string;
   umbrellaNo: string;
+  umbrellaToday: string;
+  umbrellaGaugeNo: string;
+  umbrellaGaugeMaybe: string;
+  umbrellaGaugeYes: string;
   or: string;
   head: string;
   upperBody: string;
@@ -121,6 +125,10 @@ const en: Translations = {
   umbrellaMust: "You must have an umbrella",
   umbrellaShould: "You should take an umbrella",
   umbrellaNo: "You do not need an umbrella",
+  umbrellaToday: "Umbrella today?",
+  umbrellaGaugeNo: "No",
+  umbrellaGaugeMaybe: "Maybe",
+  umbrellaGaugeYes: "Yes",
   or: "or",
   head: "Head",
   upperBody: "Upper body",
@@ -210,6 +218,10 @@ const ru: Translations = {
   umbrellaMust: "Обязательно возьми зонт",
   umbrellaShould: "Лучше взять зонт",
   umbrellaNo: "Зонт не нужен",
+  umbrellaToday: "Зонт нужен?",
+  umbrellaGaugeNo: "Нет",
+  umbrellaGaugeMaybe: "Может быть",
+  umbrellaGaugeYes: "Да",
   or: "или",
   head: "Голова",
   upperBody: "Верх",
@@ -299,6 +311,10 @@ const de: Translations = {
   umbrellaMust: "Du brauchst unbedingt einen Regenschirm",
   umbrellaShould: "Nimm besser einen Regenschirm mit",
   umbrellaNo: "Du brauchst keinen Regenschirm",
+  umbrellaToday: "Regenschirm heute?",
+  umbrellaGaugeNo: "Nein",
+  umbrellaGaugeMaybe: "Vielleicht",
+  umbrellaGaugeYes: "Ja",
   or: "oder",
   head: "Kopf",
   upperBody: "Oberkörper",
@@ -388,6 +404,10 @@ const uk: Translations = {
   umbrellaMust: "Обов'язково візьми парасольку",
   umbrellaShould: "Краще взяти парасольку",
   umbrellaNo: "Парасолька не потрібна",
+  umbrellaToday: "Парасолька сьогодні?",
+  umbrellaGaugeNo: "Ні",
+  umbrellaGaugeMaybe: "Можливо",
+  umbrellaGaugeYes: "Так",
   or: "або",
   head: "Голова",
   upperBody: "Верх",
@@ -477,6 +497,10 @@ const lv: Translations = {
   umbrellaMust: "Tev noteikti jāņem līdzi lietussargs",
   umbrellaShould: "Labāk paņem lietussargu",
   umbrellaNo: "Lietussargs nav nepieciešams",
+  umbrellaToday: "Lietussargs šodien?",
+  umbrellaGaugeNo: "Nē",
+  umbrellaGaugeMaybe: "Varbūt",
+  umbrellaGaugeYes: "Jā",
   or: "vai",
   head: "Galva",
   upperBody: "Ķermeņa augšdaļa",

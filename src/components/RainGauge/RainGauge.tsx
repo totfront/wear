@@ -1,14 +1,17 @@
+import { t } from "../../i18n/translations";
+
 interface RainGaugeProps {
   probability: number;
 }
 
 export default function RainGauge({ probability }: RainGaugeProps) {
   const pct = Math.min(100, Math.max(0, probability));
+  const labels = t();
 
   return (
     <section className="animate-in bg-[var(--card)] backdrop-blur-[10px] border border-[var(--card-line)] rounded-[var(--radius)] px-[22px] py-[18px] mt-[18px] mb-[18px] shadow-[var(--shadow)]">
       <p className="text-[0.82rem] font-medium text-[var(--ink-soft)] mb-4">
-        Umbrella today?
+        {labels.umbrellaToday}
       </p>
 
       {/* Track area with room above for the indicator */}
@@ -47,9 +50,9 @@ export default function RainGauge({ probability }: RainGaugeProps) {
 
       {/* Labels */}
       <div className="relative h-5 text-[0.72rem] text-[var(--ink-faint)] mt-0.5">
-        <span className="absolute left-0">No</span>
-        <span className="absolute left-1/2 -translate-x-1/2">Maybe</span>
-        <span className="absolute right-0">Yes</span>
+        <span className="absolute left-0">{labels.umbrellaGaugeNo}</span>
+        <span className="absolute left-1/2 -translate-x-1/2">{labels.umbrellaGaugeMaybe}</span>
+        <span className="absolute right-0">{labels.umbrellaGaugeYes}</span>
       </div>
     </section>
   );
