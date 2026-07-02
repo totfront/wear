@@ -24,8 +24,8 @@ export interface Translations {
   average: string;
   warm: string;
   changeLocation: string;
-  alwaysShowLocation: string;
-  alwaysShowLocationDesc: string;
+  hideLocation: string;
+  hideLocationDesc: string;
   teaserBefore: string;
   teaserHighlight: string;
   teaserAfter: string;
@@ -85,6 +85,8 @@ export interface Translations {
   lightBeanie: string;
   beanie: string;
   temperatureUnit: string;
+  prioritizeFeelsLike: string;
+  prioritizeFeelsLikeDesc: string;
 }
 
 const en: Translations = {
@@ -111,8 +113,8 @@ const en: Translations = {
   average: "average",
   warm: "warm",
   changeLocation: "change",
-  alwaysShowLocation: "Always show location picker",
-  alwaysShowLocationDesc: "Show the location search even when geolocation is allowed",
+  hideLocation: "Hide location picker",
+  hideLocationDesc: "Hide the location search when geolocation is permitted",
   teaserBefore: "Soon: upload your wardrobe and get your",
   teaserHighlight: "actual",
   teaserAfter: "outfit, not just the category.",
@@ -172,6 +174,8 @@ const en: Translations = {
   lightBeanie: "Light beanie",
   beanie: "Beanie",
   temperatureUnit: "Temperature unit",
+  prioritizeFeelsLike: "Prioritize feels like",
+  prioritizeFeelsLikeDesc: "Show feels like temperature as the main number",
 };
 
 const ru: Translations = {
@@ -198,8 +202,8 @@ const ru: Translations = {
   average: "нормально",
   warm: "жарко",
   changeLocation: "изменить",
-  alwaysShowLocation: "Всегда показывать выбор локации",
-  alwaysShowLocationDesc: "Показывать поиск, даже если геолокация разрешена",
+  hideLocation: "Скрыть выбор локации",
+  hideLocationDesc: "Скрывать поиск, когда геолокация разрешена",
   teaserBefore: "Скоро: загрузи свой гардероб и получи",
   teaserHighlight: "конкретный",
   teaserAfter: "образ, а не просто категорию.",
@@ -259,6 +263,8 @@ const ru: Translations = {
   lightBeanie: "Лёгкая шапка",
   beanie: "Шапка",
   temperatureUnit: "Единица температуры",
+  prioritizeFeelsLike: "Приоритет ощущаемой температуры",
+  prioritizeFeelsLikeDesc: "Показывать ощущаемую температуру как основную",
 };
 
 const de: Translations = {
@@ -285,8 +291,8 @@ const de: Translations = {
   average: "normal",
   warm: "warm",
   changeLocation: "ändern",
-  alwaysShowLocation: "Standortauswahl immer anzeigen",
-  alwaysShowLocationDesc: "Suche anzeigen, auch wenn Standort erlaubt ist",
+  hideLocation: "Standortauswahl ausblenden",
+  hideLocationDesc: "Suche ausblenden, wenn Standort erlaubt ist",
   teaserBefore: "Bald: lade deine Garderobe hoch und bekomme dein",
   teaserHighlight: "echtes",
   teaserAfter: "Outfit, nicht nur die Kategorie.",
@@ -346,6 +352,8 @@ const de: Translations = {
   lightBeanie: "Leichte Mütze",
   beanie: "Mütze",
   temperatureUnit: "Temperatureinheit",
+  prioritizeFeelsLike: "Gefühlte Temperatur priorisieren",
+  prioritizeFeelsLikeDesc: "Gefühlte Temperatur als Hauptzahl anzeigen",
 };
 
 const uk: Translations = {
@@ -372,8 +380,8 @@ const uk: Translations = {
   average: "нормально",
   warm: "спекотно",
   changeLocation: "змінити",
-  alwaysShowLocation: "Завжди показувати вибір локації",
-  alwaysShowLocationDesc: "Показувати пошук, навіть якщо геолокація дозволена",
+  hideLocation: "Приховати вибір локації",
+  hideLocationDesc: "Приховувати пошук, коли геолокація дозволена",
   teaserBefore: "Скоро: завантаж свій гардероб і отримай",
   teaserHighlight: "конкретний",
   teaserAfter: "образ, а не просто категорію.",
@@ -433,6 +441,8 @@ const uk: Translations = {
   lightBeanie: "Легка шапка",
   beanie: "Шапка",
   temperatureUnit: "Одиниця температури",
+  prioritizeFeelsLike: "Пріоритет відчутної температури",
+  prioritizeFeelsLikeDesc: "Показувати відчутну температуру як основне значення",
 };
 
 const lv: Translations = {
@@ -459,8 +469,8 @@ const lv: Translations = {
   average: "normāli",
   warm: "karsti",
   changeLocation: "mainīt",
-  alwaysShowLocation: "Vienmēr rādīt atrašanās vietas izvēli",
-  alwaysShowLocationDesc: "Rādīt meklēšanu, pat ja ģeolokācija ir atļauta",
+  hideLocation: "Paslēpt atrašanās vietas izvēli",
+  hideLocationDesc: "Paslēpt meklēšanu, kad ģeolokācija ir atļauta",
   teaserBefore: "Drīz: augšupielādē savu garderobi un saņem",
   teaserHighlight: "konkrētu",
   teaserAfter: "apģērbu, ne tikai kategoriju.",
@@ -520,6 +530,8 @@ const lv: Translations = {
   lightBeanie: "Viegla cepure",
   beanie: "Cepure",
   temperatureUnit: "Temperatūras vienība",
+  prioritizeFeelsLike: "Prioritizēt sajūtas temperatūru",
+  prioritizeFeelsLikeDesc: "Rādīt sajūtas temperatūru kā galveno skaitli",
 };
 
 const locales: Record<Locale, Translations> = { en, ru, de, uk, lv };
